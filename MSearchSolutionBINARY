@@ -1,0 +1,30 @@
+import json
+
+def binarysearch_function(number, lst):
+    left, right = 0, len(lst) - 1 #tuple unpacking / multiple assignment
+   # Python evaluates 0 and len(sorted_numbers) - 1.
+   # Then it "unpacks" these values, assigning 0 to left and len(sorted_numbers) - 1 to right simultaneously. 
+
+    while left <= right:
+        mid = (left + right) // 2
+
+        # Check if the number is at mid
+        if lst[mid] == number:
+            return mid  # Found the number at index mid
+        elif lst[mid] < number:
+            left = mid + 1  # Search in the right half; the right half is now totally out of the search process
+        else:
+            right = mid - 1  # Search in the left half; the left half is now totally out of the search process
+
+    return -1  # the number is NOT in the list
+
+targetnumber = 5851136
+with open("sorted.json", "r") as file:
+    unsortedlist = json.load(file)
+
+result = binarysearch_function(targetnumber, unsortedlist)
+
+if result != -1:
+    print(f"The number {targetnumber} was found at index {result}.")
+else:
+    print(f"The number {targetnumber} was not found in the list.")
